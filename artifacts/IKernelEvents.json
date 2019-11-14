@@ -1,0 +1,31 @@
+{
+  "contractName": "IKernelEvents",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "namespace",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "name": "appId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "app",
+          "type": "address"
+        }
+      ],
+      "name": "SetApp",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a72305820bfe0174fed7238bbc09c298e88467114a1695e7bb40021bf2095122ea3b3074a0029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a72305820bfe0174fed7238bbc09c298e88467114a1695e7bb40021bf2095122ea3b3074a0029",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

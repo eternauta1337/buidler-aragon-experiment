@@ -1,0 +1,8 @@
+{
+  "contractName": "KernelAppIds",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a72305820baf55551a540dffd255fcfedca67cd5de2d1fb92cfb1f3e93f51e3b740c609100029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a72305820baf55551a540dffd255fcfedca67cd5de2d1fb92cfb1f3e93f51e3b740c609100029",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

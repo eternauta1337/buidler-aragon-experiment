@@ -1,0 +1,29 @@
+{
+  "name": "buidler-aragon-experiment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajsantander/buidler-aragon-experiment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ajsantander/buidler-aragon-experiment/issues"
+  },
+  "homepage": "https://github.com/ajsantander/buidler-aragon-experiment#readme",
+  "dependencies": {
+    "@aragon/os": "^4.3.0",
+    "@aragon/test-helpers": "^2.1.0",
+    "@nomiclabs/buidler": "^1.0.1",
+    "@nomiclabs/buidler-truffle5": "^1.0.1",
+    "@nomiclabs/buidler-web3": "^1.0.1",
+    "eth-ens-namehash": "^2.0.8",
+    "web3": "^1.2.2"
+  }
+}
