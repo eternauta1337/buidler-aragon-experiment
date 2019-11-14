@@ -15,12 +15,12 @@ contract Counter is AragonApp {
         initialized();
     }
 
-    function increment() public {
+    function increment() external {
         value += 1;
         emit Increment(msg.sender);
     }
 
-    function decrement() public auth(DECREMENT_ROLE) {
+    function decrement() external auth(DECREMENT_ROLE) {
         value -= 1;
         emit Decrement(msg.sender);
     }
