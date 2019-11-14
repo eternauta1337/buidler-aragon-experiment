@@ -1,4 +1,4 @@
-task('aragon:set_permission', 'Creates a permission in an Aragon app')
+task('aragon:has_permission', 'Checks a permission in an Aragon app')
   .addParam('dao', 'Deployed DAO address')
   .addParam('permission', 'Name of the permission to set')
   .addParam('app', 'Address of the app where the permission will be set')
@@ -21,13 +21,10 @@ task('aragon:set_permission', 'Creates a permission in an Aragon app')
     const accounts = await web3.eth.getAccounts()
     const appManager = accounts[0]
     const role = await appInstance[permission]()
-    console.log(`ROLE:`, role)
-    const tx = await aclInstance.createPermission(
+    const hasPermission = await aclInstance.hasPermission(
       account,
       appInstance.address,
-      role,
-      appManager,
-      { from: appManager }
+      role
     )
-    console.log( JSON.stringify(tx, null, 2) )
+    console.log(hasPermission)
   })

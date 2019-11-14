@@ -7,6 +7,7 @@ require('./tasks/aragon/new_dao')
 require('./tasks/aragon/new_app')
 require('./tasks/aragon/app_call')
 require('./tasks/aragon/set_permission')
+require('./tasks/aragon/has_permission')
 
 module.exports = {
   defaultNetwork: 'localhost',
