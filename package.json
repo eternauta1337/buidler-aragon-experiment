@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "buidler compile",
+    "test": "buidler test"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/ajsantander/buidler-aragon-experiment#readme",
   "dependencies": {
+    "@aragon/cli": "aragon/aragon-cli#sdk-v7-refactor-apm-packages",
     "@aragon/os": "^4.3.0",
     "@aragon/test-helpers": "^2.1.0",
     "@nomiclabs/buidler": "^1.0.1",

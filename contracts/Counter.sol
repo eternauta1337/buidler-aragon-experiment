@@ -4,7 +4,6 @@ import "@aragon/os/contracts/apps/AragonApp.sol";
 
 contract Counter is AragonApp {
 
-    bytes32 constant public INCREMENT_ROLE = keccak256("INCREMENT_ROLE");
     bytes32 constant public DECREMENT_ROLE = keccak256("DECREMENT_ROLE");
 
     event Increment(address entity);
@@ -16,7 +15,7 @@ contract Counter is AragonApp {
         initialized();
     }
 
-    function increment() public auth(INCREMENT_ROLE) {
+    function increment() public {
         value += 1;
         emit Increment(msg.sender);
     }

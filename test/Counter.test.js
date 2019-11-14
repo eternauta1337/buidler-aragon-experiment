@@ -7,9 +7,7 @@ const deployDAO = require('./helpers/deployDAO')
 
 const Counter = artifacts.require('Counter.sol')
 
-const ANY_ADDRESS = '0xffffffffffffffffffffffffffffffffffffffff'
-
-contract('Counter', ([appManager, user]) => {
+contract('Counter', ([appManager, user, anyone]) => {
   let app
 
   beforeEach('deploy dao and app', async () => {
@@ -32,14 +30,7 @@ contract('Counter', ([appManager, user]) => {
 
     // Set up the app's permissions.
     await acl.createPermission(
-      ANY_ADDRESS, // entity (who?) - The entity or address that will have the permission.
-      app.address, // app (where?) - The app that holds the role involved in this permission.
-      await app.INCREMENT_ROLE(), // role (what?) - The particular role that the entity is being assigned to in this permission.
-      appManager, // manager - Can grant/revoke further permissions for this role.
-      { from: appManager }
-    )
-    await acl.createPermission(
-      ANY_ADDRESS,
+      user,
       app.address,
       await app.DECREMENT_ROLE(),
       appManager,
@@ -49,12 +40,21 @@ contract('Counter', ([appManager, user]) => {
     await app.initialize()
   })
 
-  it('should be incremented by any address', async () => {
-    await app.increment({ from: user })
+  it('should allow any address to increment the counter', async () => {
+    await app.increment({ from: anyone })
     assert.equal(await app.value(), 1)
   })
 
-  it('should be decremented by any address', async () => {
+  it('should not allow any address to decrement the counter', async () => {
+    await app.increment({ from: anyone })
+    await assertRevert(
+      app.decrement({ from: anyone }),
+      'Returned error:  APP_AUTH_FAILED'
+    )
+    assert.equal(await app.value(), 1)
+  })
+
+  it('should allow authorized users to decrement the counter', async () => {
     await app.increment({ from: user })
     await app.decrement({ from: user })
     assert.equal(await app.value(), 0)
