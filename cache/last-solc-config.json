@@ -1,6 +1,6 @@
 {
   "solc": {
-    "version": "0.4.24",
+    "version": "0.5.10",
     "optimizer": {
       "enabled": false,
       "runs": 200

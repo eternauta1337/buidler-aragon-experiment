@@ -49,7 +49,7 @@ contract('Counter', ([appManager, user, anyone]) => {
     await app.increment({ from: anyone })
     await assertRevert(
       app.decrement({ from: anyone }),
-      'Returned error:  APP_AUTH_FAILED'
+      'APP_AUTH_FAILED'
     )
     assert.equal(await app.value(), 1)
   })
@@ -58,5 +58,15 @@ contract('Counter', ([appManager, user, anyone]) => {
     await app.increment({ from: user })
     await app.decrement({ from: user })
     assert.equal(await app.value(), 0)
+  })
+
+  it('should show stack traces', async () => {
+    try {
+      await app.fail()
+    }
+    catch(err) {
+      console.log(`INTENTIONAL ERROR SHOWING A STACK TRACE:`)
+      console.log(err)
+    }
   })
 })

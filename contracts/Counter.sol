@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.1;
 
 import "@aragon/os/contracts/apps/AragonApp.sol";
 
@@ -23,5 +23,13 @@ contract Counter is AragonApp {
     function decrement() external auth(DECREMENT_ROLE) {
         value -= 1;
         emit Decrement(msg.sender);
+    }
+
+    function fail() public {
+        _internalFail();
+    }
+
+    function _internalFail() internal {
+        revert();
     }
 }
