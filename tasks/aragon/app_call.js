@@ -9,5 +9,5 @@ task('aragon:app_call', 'Calls a function on an Aragon app')
     const appInstance = await Contract.at(app)
 
     const tx = await appInstance[func]({ from: caller })
-    console.log(tx)
+    console.log( JSON.stringify(tx, null, 2) )
   })

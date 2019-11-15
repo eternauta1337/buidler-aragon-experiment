@@ -21,7 +21,6 @@ task('aragon:set_permission', 'Creates a permission in an Aragon app')
     const accounts = await web3.eth.getAccounts()
     const appManager = accounts[0]
     const role = await appInstance[permission]()
-    console.log(`ROLE:`, role)
     const tx = await aclInstance.createPermission(
       account,
       appInstance.address,

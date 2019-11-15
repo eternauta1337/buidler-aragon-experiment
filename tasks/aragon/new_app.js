@@ -23,7 +23,7 @@ task('aragon:new_app', 'Deploys and installs a new Aragon app in a DAO')
 
     // Instantiate a proxy for the app.
     const instanceReceipt = await daoInstance.newAppInstance(
-      hash(`${contract.toLowerCase()}.aragonpm.test`), // appId - Unique identifier for each app installed in the DAO; can be any bytes32 string in the tests.
+      hash(`${contract.toLowerCase()}.aragonpm.eth`), // appId - Unique identifier for each app installed in the DAO; can be any bytes32 string in the tests.
       appBase.address, // appBase - Location of the app's base implementation.
       '0x', // initializePayload - Used to instantiate and initialize the proxy in the same call (if given a non-empty bytes string).
       false, // setDefault - Whether the app proxy is the default proxy.

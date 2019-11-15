@@ -18,14 +18,13 @@
     "url": "https://github.com/ajsantander/buidler-aragon-experiment/issues"
   },
   "homepage": "https://github.com/ajsantander/buidler-aragon-experiment#readme",
-  "dependencies": {
-    "@aragon/cli": "aragon/aragon-cli#sdk-v7-refactor-apm-packages",
+  "devDependencies": {
     "@aragon/os": "^4.3.0",
     "@aragon/test-helpers": "^2.1.0",
     "@nomiclabs/buidler": "^1.0.1",
     "@nomiclabs/buidler-truffle5": "^1.0.1",
     "@nomiclabs/buidler-web3": "^1.0.1",
     "eth-ens-namehash": "^2.0.8",
-    "web3": "1.2.2"
+    "web3": "^1.2.0"
   }
 }
