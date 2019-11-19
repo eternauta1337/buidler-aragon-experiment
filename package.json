@@ -26,5 +26,11 @@
     "@nomiclabs/buidler-web3": "^1.0.1",
     "eth-ens-namehash": "^2.0.8",
     "web3": "^1.2.0"
+  },
+  "dependencies": {
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.12.9",
+    "ts-node": "^8.5.2",
+    "typescript": "^3.7.2"
   }
 }
