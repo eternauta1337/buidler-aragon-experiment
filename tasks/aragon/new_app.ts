@@ -1,10 +1,12 @@
-const { hash } = require('eth-ens-namehash')
-const { getEventArgument } = require('@aragon/test-helpers/events')
+import { task } from '@nomiclabs/buidler/config';
+
+import { hash } from 'eth-ens-namehash'
+import { getEventArgument } from '@aragon/test-helpers/events'
 
 task('aragon:new_app', 'Deploys and installs a new Aragon app in a DAO')
   .addParam('dao', 'Deployed DAO address')
   .addParam('contract', 'Contract name of the app to deploy')
-  .setAction(async ({ dao, contract }) => {
+  .setAction(async ({ dao, contract }, { web3, artifacts }) => {
     // Retrieve contract artifacts.
     const Kernel = artifacts.require('@aragon/core/contracts/kernel/Kernel')
     const ACL = artifacts.require('@aragon/core/contracts/acl/ACL')

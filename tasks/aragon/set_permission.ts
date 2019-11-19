@@ -1,10 +1,12 @@
-task('aragon:has_permission', 'Checks a permission in an Aragon app')
+import { task } from '@nomiclabs/buidler/config';
+
+task('aragon:set_permission', 'Creates a permission in an Aragon app')
   .addParam('dao', 'Deployed DAO address')
   .addParam('permission', 'Name of the permission to set')
   .addParam('app', 'Address of the app where the permission will be set')
   .addParam('contract', 'App contract name')
   .addParam('account', 'Account who is getting the permission')
-  .setAction(async ({ dao, permission, app, contract, account }) => {
+  .setAction(async ({ dao, permission, app, contract, account }, { web3, artifacts }) => {
     // Retrieve contract artifacts.
     const Kernel = artifacts.require('@aragon/core/contracts/kernel/Kernel')
     const ACL = artifacts.require('@aragon/core/contracts/acl/ACL')
@@ -21,10 +23,12 @@ task('aragon:has_permission', 'Checks a permission in an Aragon app')
     const accounts = await web3.eth.getAccounts()
     const appManager = accounts[0]
     const role = await appInstance[permission]()
-    const hasPermission = await aclInstance.hasPermission(
+    const tx = await aclInstance.createPermission(
       account,
       appInstance.address,
-      role
+      role,
+      appManager,
+      { from: appManager }
     )
-    console.log(hasPermission)
+    console.log( JSON.stringify(tx, null, 2) )
   })

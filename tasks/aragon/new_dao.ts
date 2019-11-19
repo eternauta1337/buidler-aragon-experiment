@@ -1,7 +1,9 @@
-const { getEventArgument } = require('@aragon/test-helpers/events')
+import { task } from '@nomiclabs/buidler/config';
+
+import { getEventArgument } from '@aragon/test-helpers/events'
 
 task('aragon:new_dao', 'Deploys a new Aragon DAO')
-  .setAction(async () => {
+  .setAction(async ({}, { web3, artifacts }) => {
     // Retrieve contract artifacts.
     const Kernel = artifacts.require('@aragon/core/contracts/kernel/Kernel')
     const ACL = artifacts.require('@aragon/core/contracts/acl/ACL')

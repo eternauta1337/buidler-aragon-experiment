@@ -1,16 +1,15 @@
 /* global artifacts contract beforeEach it assert */
 
-import { web3 } from '@nomiclabs/buidler';
+import { web3, artifacts } from '@nomiclabs/buidler';
 
-import chai from 'chai';
+import { assert } from 'chai';
 
 const { assertRevert } = require('@aragon/test-helpers/assertThrow')
 const { getEventArgument } = require('@aragon/test-helpers/events')
 const { hash } = require('eth-ens-namehash')
 const deployDAO = require('./helpers/deployDAO')
 
-// const Counter = artifacts.require('Counter.sol')
-import Counter from 'artifacts/Counter.json';
+const Counter = artifacts.require('Counter')
 
 describe('Counter', () => {
   let app: any
@@ -21,6 +20,7 @@ describe('Counter', () => {
 
   beforeEach('retrieve accounts', async () => {
     const accounts = await web3.eth.getAccounts()
+
     appManager = accounts[0]
     user = accounts[1]
     anyone = accounts[2]
