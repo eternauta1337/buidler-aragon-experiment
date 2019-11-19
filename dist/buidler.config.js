@@ -18,7 +18,7 @@ var config = {
         }
     },
     solc: {
-        version: '0.5.10'
+        version: '0.5.10',
     }
 };
 exports.default = config;
