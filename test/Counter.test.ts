@@ -1,14 +1,30 @@
 /* global artifacts contract beforeEach it assert */
 
+import { web3, artifacts } from '@nomiclabs/buidler';
+
+import { assert } from 'chai';
+
 const { assertRevert } = require('@aragon/test-helpers/assertThrow')
 const { getEventArgument } = require('@aragon/test-helpers/events')
 const { hash } = require('eth-ens-namehash')
 const deployDAO = require('./helpers/deployDAO')
 
-const Counter = artifacts.require('Counter.sol')
+const Counter = artifacts.require('Counter')
 
-contract('Counter', ([appManager, user, anyone]) => {
-  let app
+describe('Counter', () => {
+  let app: any
+
+  let appManager: string
+  let user: string
+  let anyone: string
+
+  beforeEach('retrieve accounts', async () => {
+    const accounts = await web3.eth.getAccounts()
+
+    appManager = accounts[0]
+    user = accounts[1]
+    anyone = accounts[2]
+  })
 
   beforeEach('deploy dao and app', async () => {
     const { dao, acl } = await deployDAO(appManager)

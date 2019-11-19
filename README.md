@@ -2,12 +2,19 @@
 
 This experiment is intended to act as an evaluation of how Buidler could work as a front end for the aragonSDK, which is being extracted from the aragonCLI.
 
-## Running the experiment
-* Clone
+## Running experiments
+
+### Setup
+* Clon
 * Npm install
+
+### Running experiment.sh to see custom Aragon tasks
 * Start a local ganache-cli at localhost:8545
 * ./scripts/experiment.sh
-* Look at the obfuscated console output in confusion and awe
+* Stare at the obfuscated console output with confusion and awe
+
+### Solidity stack traces
+* npm t
 
 ## Tasks
 - [x] Setup Buidler with a basic Aragon app.

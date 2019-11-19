@@ -1,5 +1,7 @@
 /* global artifacts */
 
+import { web3, artifacts } from '@nomiclabs/buidler';
+
 const Kernel = artifacts.require('@aragon/core/contracts/kernel/Kernel')
 const ACL = artifacts.require('@aragon/core/contracts/acl/ACL')
 const EVMScriptRegistryFactory = artifacts.require(
