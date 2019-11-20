@@ -1,45 +1,46 @@
-/* global artifacts */
+import { getEventArgument } from '@aragon/test-helpers/events'
+import { deployContract } from 'ethereum-waffle'
 
-import { web3, artifacts } from '@nomiclabs/buidler';
-
-const Kernel = artifacts.require('@aragon/core/contracts/kernel/Kernel')
-const ACL = artifacts.require('@aragon/core/contracts/acl/ACL')
-const EVMScriptRegistryFactory = artifacts.require(
-  '@aragon/core/contracts/factory/EVMScriptRegistryFactory'
-)
-const DAOFactory = artifacts.require(
-  '@aragon/core/contracts/factory/DAOFactory'
-)
-
-const { getEventArgument } = require('@aragon/test-helpers/events')
+import { ethers } from '@nomiclabs/buidler'
 
 const deployDAO = async appManager => {
+  // Retrieve contract factories.
+  const Kernel = await ethers.getContract('Kernel')
+  const ACL = await ethers.getContract('ACL')
+  const EVMScriptRegistryFactory = await ethers.getContract('EVMScriptRegistryFactory')
+  const DAOFactory = await ethers.getContract('DAOFactory')
+
   // Deploy a DAOFactory.
-  const kernelBase = await Kernel.new(true)
-  const aclBase = await ACL.new()
-  const registryFactory = await EVMScriptRegistryFactory.new()
-  const daoFactory = await DAOFactory.new(
+  const kernelBase = await Kernel.deploy(true)
+  const aclBase = await ACL.deploy()
+  const registryFactory = await EVMScriptRegistryFactory.deploy()
+  const daoFactory = await DAOFactory.deploy(
     kernelBase.address,
     aclBase.address,
     registryFactory.address
   )
 
   // Create a DAO instance.
-  const daoReceipt = await daoFactory.newDAO(appManager)
-  const dao = await Kernel.at(getEventArgument(daoReceipt, 'DeployDAO', 'dao'))
+  const daoReceipt = await daoFactory.newDAO(appManager.address)
+  console.log( JSON.stringify(daoReceipt, null, 2) )
+  // const dao = await Kernel.at(getEventArgument(daoReceipt, 'DeployDAO', 'dao'))
+  const daoAddress = getEventArgument(daoReceipt, 'DeployDAO', 'dao')
+  const dao = Kernel.attach(daoAddress)
+  console.log(dao.address)
 
   // Grant the appManager address permission to install apps in the DAO.
-  const acl = await ACL.at(await dao.acl())
-  const APP_MANAGER_ROLE = await kernelBase.APP_MANAGER_ROLE()
-  await acl.createPermission(
-    appManager,
-    dao.address,
-    APP_MANAGER_ROLE,
-    appManager,
-    { from: appManager }
-  )
+  // const acl = await ACL.at(await dao.acl())
+  // const APP_MANAGER_ROLE = await kernelBase.APP_MANAGER_ROLE()
+  // await acl.createPermission(
+  //   appManager,
+  //   dao.address,
+  //   APP_MANAGER_ROLE,
+  //   appManager,
+  //   { from: appManager }
+  // )
 
-  return { dao, acl }
+  // return { dao, acl }
+  return { dao: {}, acl: {} }
 }
 
-module.exports = deployDAO
+export default deployDAO
