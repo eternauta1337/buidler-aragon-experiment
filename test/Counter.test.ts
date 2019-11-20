@@ -9,10 +9,13 @@ const { getEventArgument } = require('@aragon/test-helpers/events')
 const { hash } = require('eth-ens-namehash')
 const deployDAO = require('./helpers/deployDAO')
 
+const CounterArtifact = artifacts.require('Counter')
+import { CounterInstance } from '../typechain'
+
 const Counter = artifacts.require('Counter')
 
 describe('Counter', () => {
-  let app: any
+  let app: CounterInstance
 
   let appManager: string
   let user: string
@@ -58,7 +61,7 @@ describe('Counter', () => {
 
   it('should allow any address to increment the counter', async () => {
     await app.increment({ from: anyone })
-    assert.equal(await app.value(), 1)
+    assert.equal((await app.value()).toNumber(), 1)
   })
 
   it('should not allow any address to decrement the counter', async () => {
@@ -67,13 +70,13 @@ describe('Counter', () => {
       app.decrement({ from: anyone }),
       'APP_AUTH_FAILED'
     )
-    assert.equal(await app.value(), 1)
+    assert.equal((await app.value()).toNumber(), 1)
   })
 
   it('should allow authorized users to decrement the counter', async () => {
     await app.increment({ from: user })
     await app.decrement({ from: user })
-    assert.equal(await app.value(), 0)
+    assert.equal((await app.value()).toNumber(), 0)
   })
 
   it('should show stack traces', async () => {

@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "generate": "typechain --target truffle --outDir typechain 'artifacts/*.json'",
     "compile": "buidler compile",
     "test": "buidler test --network buidlerevm"
   },
@@ -32,5 +33,10 @@
     "chai": "^4.2.0",
     "ts-node": "^8.5.2",
     "typescript": "^3.7.2"
+  },
+  "dependencies": {
+    "truffle-typings": "^1.0.8",
+    "typechain": "^1.0.3",
+    "typechain-target-truffle": "^1.0.1"
   }
 }
