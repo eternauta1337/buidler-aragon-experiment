@@ -1,0 +1,29 @@
+await counter.safeFunction(42)
+await counter.safeFunction()
+const counter = await Counter.new()
+const Counter = artifacts.require('Counter')
+compile
+const counter = await Counter.new()
+const Counter = artifacts.require('Counter')
+await counter.safeFunction(42)
+const counter = await Counter.new()
+const Counter = artifacts.require('Counter')
+await counter.totallySafeFunctionThatCouldNotPossiblyEverFail()
+const counter = await Counter.new()
+const Counter = artifacts.require('Counter')
+await counter.totallySafeFunctionThatCouldNotPossiblyEverFail()
+const counter = await Counter.new()
+const Counter = artifacts.require('Counter')
+network
+await counter.fail()
+const counter = await Counter.new()
+const Counter = artifacts.require('Counter')
+const counter = await Counter.new()
+await counter.fail()
+counter.fail()
+counter.address
+conter.address
+const counter = await Counter.new()
+const Counter = artifacts.require('Counter')
+Counter
+artifacts

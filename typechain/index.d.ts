@@ -785,6 +785,25 @@ export interface CounterInstance extends Truffle.ContractInstance {
 
   value(txDetails?: Truffle.TransactionDetails): Promise<BigNumber>;
 
+  safeFunction: {
+    (
+      _value: number | BigNumber | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse>;
+    call(
+      _value: number | BigNumber | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<void>;
+    sendTransaction(
+      _value: number | BigNumber | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _value: number | BigNumber | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
   allowRecoverability(
     token: string | BigNumber,
     txDetails?: Truffle.TransactionDetails
@@ -832,15 +851,6 @@ export interface CounterInstance extends Truffle.ContractInstance {
   ): Promise<boolean>;
 
   getEVMScriptRegistry(txDetails?: Truffle.TransactionDetails): Promise<string>;
-
-  fail: {
-    (txDetails?: Truffle.TransactionDetails): Promise<
-      Truffle.TransactionResponse
-    >;
-    call(txDetails?: Truffle.TransactionDetails): Promise<void>;
-    sendTransaction(txDetails?: Truffle.TransactionDetails): Promise<string>;
-    estimateGas(txDetails?: Truffle.TransactionDetails): Promise<number>;
-  };
 
   increment: {
     (txDetails?: Truffle.TransactionDetails): Promise<

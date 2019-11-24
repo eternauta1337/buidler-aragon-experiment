@@ -2,7 +2,6 @@ import { usePlugin, BuidlerConfig } from '@nomiclabs/buidler/config';
 
 usePlugin('@nomiclabs/buidler-truffle5');
 
-// Fooling around with some Aragon related custom tasks.
 import './tasks/misc/account';
 import './tasks/misc/accounts';
 import './tasks/aragon/new_dao';

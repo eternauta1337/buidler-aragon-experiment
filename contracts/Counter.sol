@@ -25,11 +25,7 @@ contract Counter is AragonApp {
         emit Decrement(msg.sender);
     }
 
-    function fail() public {
-        _internalFail();
-    }
-
-    function _internalFail() internal {
-        revert();
+    function safeFunction(uint256 _value) public {
+        getTimestamp64();
     }
 }

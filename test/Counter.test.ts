@@ -32,22 +32,20 @@ describe('Counter', () => {
   beforeEach('deploy dao and app', async () => {
     const { dao, acl } = await deployDAO(appManager)
 
-    // Deploy the app's base contract.
     const appBase = await Counter.new()
 
-    // Instantiate a proxy for the app, using the base contract as its logic implementation.
     const instanceReceipt = await dao.newAppInstance(
-      hash('counter.aragonpm.test'), // appId - Unique identifier for each app installed in the DAO; can be any bytes32 string in the tests.
-      appBase.address, // appBase - Location of the app's base implementation.
-      '0x', // initializePayload - Used to instantiate and initialize the proxy in the same call (if given a non-empty bytes string).
-      false, // setDefault - Whether the app proxy is the default proxy.
+      hash('counter.aragonpm.test'),
+      appBase.address,
+      '0x',
+      false,
       { from: appManager }
     )
     app = await Counter.at(
       getEventArgument(instanceReceipt, 'NewAppProxy', 'proxy')
     )
+    // app.safeFunction
 
-    // Set up the app's permissions.
     await acl.createPermission(
       user,
       app.address,
@@ -79,13 +77,13 @@ describe('Counter', () => {
     assert.equal((await app.value()).toNumber(), 0)
   })
 
-  it('should show stack traces', async () => {
-    try {
-      await app.fail()
-    }
-    catch(err) {
-      console.log(`INTENTIONAL ERROR SHOWING A STACK TRACE:`)
-      console.log(err)
-    }
-  })
+  // it('should show stack traces', async () => {
+  //   try {
+  //     await app.fail()
+  //   }
+  //   catch(err) {
+  //     console.log(`INTENTIONAL ERROR SHOWING A STACK TRACE:`)
+  //     console.log(err)
+  //   }
+  // })
 })
