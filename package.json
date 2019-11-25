@@ -35,7 +35,7 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
-    "gabi-cli": "^6.3.4",
+    "@aragon/cli": "^6.4.1",
     "truffle-typings": "^1.0.8",
     "typechain": "^1.0.3",
     "typechain-target-truffle": "^1.0.1"

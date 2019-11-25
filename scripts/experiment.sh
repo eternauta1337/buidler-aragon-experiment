@@ -44,6 +44,5 @@ npx buidler aragon:set_permission --dao $DAO --permission DECREMENT_ROLE --app $
 # npx buidler aragon:app_call --app $APP --contract Counter --func value --caller $ACCOUNT
 
 # List DAO permissions.
-# BLOCKED: Logic is too tightly coupled with aragon.js
-# printf "\n\n"
-# npx buidler aragon:list_permissions --dao $DAO
+printf "\n\n"
+npx buidler aragon:list_permissions --dao $DAO
