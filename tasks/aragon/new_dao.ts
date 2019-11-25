@@ -1,43 +1,143 @@
 import { task } from '@nomiclabs/buidler/config';
 
-import { getEventArgument } from '@aragon/test-helpers/events'
+import newDAO from '@aragon/cli/src/lib/dao/new'
+
+const TemplateAbi = `[
+    {
+      "inputs": [
+        {
+          "name": "_daoFactory",
+          "type": "address"
+        },
+        {
+          "name": "_ens",
+          "type": "address"
+        },
+        {
+          "name": "_miniMeFactory",
+          "type": "address"
+        },
+        {
+          "name": "_aragonID",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "dao",
+          "type": "address"
+        }
+      ],
+      "name": "DeployDao",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "dao",
+          "type": "address"
+        }
+      ],
+      "name": "SetupDao",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "token",
+          "type": "address"
+        }
+      ],
+      "name": "DeployToken",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "appProxy",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "appId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "InstalledApp",
+      "type": "event"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_appId",
+          "type": "bytes32"
+        },
+        {
+          "name": "_roles",
+          "type": "bytes32[]"
+        },
+        {
+          "name": "_authorizedAddress",
+          "type": "address"
+        },
+        {
+          "name": "_initializeCallData",
+          "type": "bytes"
+        }
+      ],
+      "name": "newInstance",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "newInstance",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]`
 
 task('aragon:new_dao', 'Deploys a new Aragon DAO')
-  .setAction(async ({}, { web3, artifacts }) => {
-    // Retrieve contract artifacts.
-    const Kernel = artifacts.require('@aragon/core/contracts/kernel/Kernel')
-    const ACL = artifacts.require('@aragon/core/contracts/acl/ACL')
-    const EVMScriptRegistryFactory = artifacts.require('@aragon/core/contracts/factory/EVMScriptRegistryFactory')
-    const DAOFactory = artifacts.require('@aragon/core/contracts/factory/DAOFactory')
+  .setAction(async ({}, { web3 }) => {
+    const repo = {
+      abi: JSON.parse(TemplateAbi),
+      contractAddress: '0x715752D24f27224d4a88957896A141Df87a50448'
+    }
 
-    // Address that will own the DAO.
-    const accounts = await web3.eth.getAccounts()
-    const appManager = accounts[0]
+    const templateInstance = undefined
+    const newInstanceMethod = 'newInstance'
+    const newInstanceArgs = []
+    const deployEvent = 'DeployDao'
+    const gasPrice = 2
 
-    // Deploy a DAOFactory.
-    const kernelBase = await Kernel.new(true)
-    const aclBase = await ACL.new()
-    const registryFactory = await EVMScriptRegistryFactory.new()
-    const daoFactory = await DAOFactory.new(
-      kernelBase.address,
-      aclBase.address,
-      registryFactory.address
-    )
+    const dao = await newDAO({
+      repo,
+      web3,
+      templateInstance,
+      newInstanceMethod,
+      newInstanceArgs,
+      deployEvent,
+      gasPrice,
+    })
 
-    // Create a DAO instance.
-    const daoReceipt = await daoFactory.newDAO(appManager)
-    const dao = await Kernel.at(getEventArgument(daoReceipt, 'DeployDAO', 'dao'))
-
-    // Grant the appManager address permission to install apps in the DAO.
-    const acl = await ACL.at(await dao.acl())
-    const APP_MANAGER_ROLE = await kernelBase.APP_MANAGER_ROLE()
-    await acl.createPermission(
-      appManager,
-      dao.address,
-      APP_MANAGER_ROLE,
-      appManager,
-      { from: appManager }
-    )
-
-    console.log(dao.address)
+    console.log(dao)
   })

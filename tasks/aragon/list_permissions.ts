@@ -13,10 +13,10 @@ task('aragon:list_permissions', 'List all DAO permissions')
 
     const info = await getDaoAddressPermissionsApps({
       dao,
-      web3Provider: web3.provider,
-      ipfsConfig,
+      web3Provider: web3.currentProvider,
+      ipfsConf: ipfsConfig,
       apm: apmConfig
     })
 
-    console.log(info)
+    console.log('info:', info)
   })
