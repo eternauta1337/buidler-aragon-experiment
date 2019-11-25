@@ -9,6 +9,7 @@ import './tasks/aragon/new_app';
 import './tasks/aragon/app_call';
 import './tasks/aragon/set_permission';
 import './tasks/aragon/has_permission';
+import './tasks/aragon/list_permissions';
 
 const config: BuidlerConfig = {
   defaultNetwork: 'localhost',
@@ -19,7 +20,7 @@ const config: BuidlerConfig = {
   },
   solc: {
     version: '0.5.10',
-  }
+  },
 };
 
 export default config;
