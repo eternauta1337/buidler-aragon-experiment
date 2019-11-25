@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2017",
     "module": "commonjs",
     "strict": true,
     "esModuleInterop": true,
     "outDir": "dist",
     "resolveJsonModule": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "allowJs": true
   },
   "include": ["./scripts", "./test"],
   "files": [

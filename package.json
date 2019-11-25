@@ -21,22 +21,24 @@
   "homepage": "https://github.com/ajsantander/buidler-aragon-experiment#readme",
   "devDependencies": {
     "@aragon/os": "aragon/aragonOS#solidity5",
+    "@aragon/cli": "^6.4.1",
     "@aragon/test-helpers": "^2.1.0",
     "@nomiclabs/buidler": "^1.0.1",
     "@nomiclabs/buidler-truffle5": "^1.0.1",
     "@nomiclabs/buidler-web3": "^1.0.1",
-    "eth-ens-namehash": "^2.0.8",
-    "web3": "^1.2.0",
     "@types/chai": "^4.2.5",
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.12.9",
+    "web3": "^1.2.0",
     "chai": "^4.2.0",
+    "eth-ens-namehash": "^2.0.8",
     "ts-node": "^8.5.2",
-    "typescript": "^3.7.2"
-  },
-  "dependencies": {
+    "typescript": "^3.7.2",
     "truffle-typings": "^1.0.8",
     "typechain": "^1.0.3",
     "typechain-target-truffle": "^1.0.1"
+  },
+  "dependencies": {
+    "@aragon/templates-shared": "^1.0.1"
   }
 }

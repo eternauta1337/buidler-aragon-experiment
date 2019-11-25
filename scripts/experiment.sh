@@ -8,8 +8,8 @@ set -e
 
 
 # Define some accounts.
-printf "\n\n"
-npx buidler accounts
+# printf "\n\n"
+# npx buidler accounts
 ANY=0xffffffffffffffffffffffffffffffffffffffff
 ACCOUNT=$(npx buidler account --idx 2)
 
@@ -20,7 +20,7 @@ printf "\n\n"
 APP=$(npx buidler aragon:new_app --contract Counter --dao $DAO)
 
 # Call the app's increment function, which can be called by any address.
-printf "\n\n"
+# printf "\n\n"
 npx buidler aragon:app_call --app $APP --contract Counter --func increment --caller $ACCOUNT
 
 # Call the app's value function, which should return '1'
@@ -42,3 +42,7 @@ npx buidler aragon:app_call --app $APP --contract Counter --func decrement --cal
 # Call the app's value function, which should return '0'.
 printf "\n\n"
 npx buidler aragon:app_call --app $APP --contract Counter --func value --caller $ACCOUNT
+
+# List DAO permissions.
+printf "\n\n"
+npx buidler aragon:list_permissions --dao $DAO
